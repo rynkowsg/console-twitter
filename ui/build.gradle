@@ -1,0 +1,28 @@
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets {
+  main {
+    java {
+      srcDir 'src/main/java'
+    }
+  }
+  test {
+    java {
+      srcDir 'src/test/java'
+    }
+  }
+}
+
+dependencies {
+  compile project(':domain')
+  compile project(':data')
+
+  testCompile 'junit:junit:4.12'
+  testCompile 'org.mockito:mockito-core:2.7.22'
+}
+
+mainClassName = 'TwitterLikeApp'

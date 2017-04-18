@@ -16,5 +16,6 @@ include 'services:webservice'
 */
 include ':domain'
 include ':data'
+include ':ui'
 
 rootProject.name = 'console-twitter'
