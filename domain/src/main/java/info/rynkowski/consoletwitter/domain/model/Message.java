@@ -10,10 +10,12 @@ import org.joda.time.DateTime;
 @Getter
 public class Message implements Comparable<Message> {
 
+  private final String author;
   private final String text;
   private final DateTime date;
 
   public Message(final Builder builder) {
+    this.author = builder.author;
     this.text = builder.text;
     this.date = builder.date;
   }
@@ -26,6 +28,7 @@ public class Message implements Comparable<Message> {
   @Setter
   @Accessors(fluent = true, chain = true)
   public static class Builder {
+    private String author;
     private String text;
     private DateTime date;
 

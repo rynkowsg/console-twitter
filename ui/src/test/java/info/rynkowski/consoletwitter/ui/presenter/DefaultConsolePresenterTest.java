@@ -60,11 +60,11 @@ public class DefaultConsolePresenterTest {
     // when
     consolePresenter.onPostMessage(author, message);
     // then
-    final ArgumentCaptor<PostMessageInteractor.Params> argument =
-        ArgumentCaptor.forClass(PostMessageInteractor.Params.class);
+    final ArgumentCaptor<Message> argument =
+        ArgumentCaptor.forClass(Message.class);
     verify(postMessage, times(1)).execute(argument.capture());
-    assertEquals(author, argument.getValue().getUsername());
-    assertEquals(message, argument.getValue().getMessage().getText());
+    assertEquals(author, argument.getValue().getAuthor());
+    assertEquals(message, argument.getValue().getText());
   }
 
   @Test
@@ -92,6 +92,7 @@ public class DefaultConsolePresenterTest {
     consolePresenter.onShowWall(username);
     // then
     verify(readWall, times(1)).execute(username);
-    verify(consoleView, times(1)).print(messages);
+    verify(consoleView, times(1))
+        .print(messages, ConsoleView.PrintMode.WITH_AUTOR);
   }
 }

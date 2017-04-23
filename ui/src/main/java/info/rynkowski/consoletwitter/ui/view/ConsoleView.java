@@ -5,9 +5,13 @@ import java.util.List;
 
 public interface ConsoleView {
 
+  enum PrintMode { WITH_AUTOR, WITHOUT_AUTOR }
+
   void open();
 
   void close();
 
   void print(final List<Message> messages);
+
+  void print(final List<Message> messages, PrintMode printMode);
 }

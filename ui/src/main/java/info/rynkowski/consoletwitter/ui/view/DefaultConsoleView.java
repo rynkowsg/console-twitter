@@ -37,6 +37,9 @@ public class DefaultConsoleView implements ConsoleView {
     Scanner scanner = new Scanner(inputStream);
     while (!closeFlag) {
       outputSteam.print("> ");
+      if(!scanner.hasNextLine()) {
+        break;
+      }
       final String command = scanner.nextLine();
       inputHandler.processCommand(command);
     }
@@ -47,10 +50,15 @@ public class DefaultConsoleView implements ConsoleView {
   }
 
   @Override public void print(final List<Message> messages) {
+    print(messages, PrintMode.WITHOUT_AUTOR);
+  }
+
+  @Override public void print(final List<Message> messages, PrintMode mode) {
     final DateTime now = DateTime.now();
     for (final Message message : messages) {
       final String elapsedTime = elapsedTimeTextGenerator.generate(message.getDate(), now);
-      outputSteam.printf("%s (%s)\n", message.getText(), elapsedTime);
+      final String authorDetails = mode == PrintMode.WITH_AUTOR ? message.getAuthor() + " - " : "";
+      outputSteam.printf("%s%s (%s)\n", authorDetails, message.getText(), elapsedTime);
     }
   }
 }

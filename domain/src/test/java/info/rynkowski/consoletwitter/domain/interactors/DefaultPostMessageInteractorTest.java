@@ -23,15 +23,12 @@ public class DefaultPostMessageInteractorTest {
   @Test
   public void test_oneMessage() {
     // preparation
-    doNothing().when(messagesRepository).addMessage(anyString(), any(Message.class));
+    doNothing().when(messagesRepository).addMessage(any(Message.class));
     // usage
-    final PostMessageInteractor.Params params = new PostMessageInteractor.Params.Builder()
-        .username("rynkowsg")
-        .message(new Message.Builder().text("MessageText").dateNow().build())
-        .build();
-    postMessage.execute(params);
+    final Message message = new Message.Builder()
+        .author("rynkowsg").text("MessageText").dateNow().build();
+    postMessage.execute(message);
     // verification
-    verify(messagesRepository, times(1))
-        .addMessage(params.getUsername(), params.getMessage());
+    verify(messagesRepository, times(1)).addMessage(message);
   }
 }

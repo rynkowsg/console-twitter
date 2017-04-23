@@ -13,7 +13,8 @@ public class MessagesRepositoryInMemory implements MessagesRepository {
   private final Map<String, List<Message>> storage = new HashMap<>();
 
   @Override
-  public void addMessage(final String username, final Message message) {
+  public void addMessage(final Message message) {
+    final String username = message.getAuthor();
     if (storage.containsKey(username)) {
       storage.get(username).add(message);
     } else {

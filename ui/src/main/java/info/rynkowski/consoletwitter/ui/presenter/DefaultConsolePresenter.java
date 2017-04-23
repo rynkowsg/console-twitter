@@ -46,16 +46,13 @@ public class DefaultConsolePresenter implements ConsolePresenter {
 
   @Override public void onPostMessage(final String username, final String message) {
     postMessage.execute(
-        new PostMessageInteractor.Params.Builder()
-            .username(username)
-            .message(new Message.Builder().text(message).dateNow().build())
-            .build()
+        new Message.Builder().author(username).text(message).dateNow().build()
     );
   }
 
   @Override public void onShowWall(final String username) {
     final List<Message> messages = readWall.execute(username);
-    view.print(messages);
+    view.print(messages, ConsoleView.PrintMode.WITH_AUTOR);
   }
 
   @Override public void onShowTimeline(final String username) {

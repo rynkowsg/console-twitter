@@ -30,9 +30,10 @@ public class MessagesRepositoryInMemoryTest {
 
   @Test public void testWhenOneElemAdded() {
     // given
-    final Message message = new Message.Builder().text("Message Text").dateNow().build();
+    final Message message = new Message.Builder()
+        .author(USERNAME).text("Message Text").dateNow().build();
     // when
-    repositoryInMemory.addMessage(USERNAME, message);
+    repositoryInMemory.addMessage(message);
     // then
     final List<Message> messages = repositoryInMemory.getMessages(USERNAME);
     assertEquals(1, messages.size());
@@ -42,21 +43,24 @@ public class MessagesRepositoryInMemoryTest {
   @Test public void testWithTwoUsers() {
     // given
     final Message firstMsgOfUser1 = new Message.Builder()
+        .author(USERNAME)
         .text("Message Text 1")
         .date(new DateTime(2017, 4, 16, 17, 0))
         .build();
     final Message messageOfUser2 = new Message.Builder()
+        .author(USERNAME2)
         .text("Message Text 2")
         .date(new DateTime(2017, 4, 17, 17, 0))
         .build();
     final Message secondMsgOfUser1 = new Message.Builder()
+        .author(USERNAME)
         .text("Message Text 3")
         .date(new DateTime(2017, 4, 18, 17, 0))
         .build();
     // when
-    repositoryInMemory.addMessage(USERNAME, firstMsgOfUser1);
-    repositoryInMemory.addMessage(USERNAME2, messageOfUser2);
-    repositoryInMemory.addMessage(USERNAME, secondMsgOfUser1);
+    repositoryInMemory.addMessage(firstMsgOfUser1);
+    repositoryInMemory.addMessage(messageOfUser2);
+    repositoryInMemory.addMessage(secondMsgOfUser1);
     // then
     final List<Message> expectingMessagesOfUser1 = Arrays.asList(firstMsgOfUser1, secondMsgOfUser1);
     final List<Message> expectingMessagesOfUser2 = Collections.singletonList(messageOfUser2);

@@ -1,5 +1,6 @@
 package info.rynkowski.consoletwitter.domain.interactors;
 
+import info.rynkowski.consoletwitter.domain.model.Message;
 import info.rynkowski.consoletwitter.domain.model.MessagesRepository;
 
 public class DefaultPostMessageInteractor implements PostMessageInteractor {
@@ -11,8 +12,8 @@ public class DefaultPostMessageInteractor implements PostMessageInteractor {
   }
 
   @Override
-  public Void execute(final Params params) {
-    repository.addMessage(params.getUsername(), params.getMessage());
+  public Void execute(final Message message) {
+    repository.addMessage(message);
     return null;
   }
 }
