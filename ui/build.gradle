@@ -25,4 +25,4 @@ dependencies {
   testCompile 'org.mockito:mockito-core:2.7.22'
 }
 
-mainClassName = 'TwitterLikeApp'
+mainClassName = 'info.rynkowski.consoletwitter.ui.ConsoleTwitterApp'
