@@ -1,4 +1,4 @@
-**Exercise**
+### Exercise
 
 Implement a console-based social networking application (similar to Twitter http://twitter.com/) satisfying the scenarios below.
 
@@ -49,3 +49,45 @@ IMPORTANT: Focus on writing the best code you can produce. Do not rush. Take as 
 
 Code Submission
 Push the code to your own GitHub account, as a public project, and send us the link.
+
+
+### How to run the application
+
+    # compilation and packaging the app
+    ./gradlew fatJar
+
+    # running the app
+    java -classpath ui/build/libs/ui-all-1.0.jar info.rynkowski.consoletwitter.ui.ConsoleTwitterApp
+
+### How to run tests
+
+    ./gradlew test
+
+#### Unit tests' reports
+
+* ./domain/build/reports/tests/test/index.html
+* ./data/build/reports/tests/test/index.html
+* ./ui/build/reports/tests/test/index.html
+
+
+### Usage
+
+* posting new message
+
+    `> greg -> message`
+
+* following a user
+
+    `> greg follows tom`
+
+* showing user's timeline
+
+    `> greg`
+
+* showing user's wall
+
+    `> greg wall`
+
+* exiting the app
+
+    `> :exit`

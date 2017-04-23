@@ -4,6 +4,8 @@ apply plugin: 'application'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+version = '1.0'
+
 sourceSets {
   main {
     java {
@@ -17,6 +19,10 @@ sourceSets {
   }
 }
 
+run {
+  standardInput = System.in
+}
+
 dependencies {
   compile project(':domain')
   compile project(':data')
@@ -26,3 +32,15 @@ dependencies {
 }
 
 mainClassName = 'info.rynkowski.consoletwitter.ui.ConsoleTwitterApp'
+
+//create a single Jar with all dependencies
+task fatJar(type: Jar) {
+  manifest {
+    attributes 'Implementation-Title': 'Twitter Like Command Line application',
+            'Implementation-Version': version,
+            'Main-Class': 'info.rynkowski.consoletwitter.ui.ConsoleTwitterApp'
+  }
+  baseName = project.name + '-all'
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+  with jar
+}
